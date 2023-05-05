@@ -1,6 +1,14 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const connection = require("./database/database")
+const perguntaModel = require('./database/pergunta')
+
+connection.authenticate().then(()=>{
+    console.log('Conexão realizada com o DB com sucesso!')
+}).catch((error)=>{
+console.log(error)
+})
 
 
 // está dizendo ao Express que irá usar o EJS como View Engine
