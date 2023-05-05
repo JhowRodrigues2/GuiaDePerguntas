@@ -25,9 +25,8 @@ app.use(bodyParser.json());
 
 // render irá renderizar o html de acordo com o arquivo criado na view
 app.get("/", (req, res) => {
-  // o raw:true lista apenas os dados em json
-  Pergunta.findAll({ raw: true }).then((perguntas) => {
-    console.log(perguntas);
+  // o raw:true lista apenas os dados em json, ordena pelo id do maior pelo menor
+  Pergunta.findAll({ raw: true, order:[['id','DESC']] }).then((perguntas) => {
     res.render("index", {
       perguntas: perguntas
     });
