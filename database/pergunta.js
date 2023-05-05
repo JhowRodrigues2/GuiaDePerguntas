@@ -16,3 +16,5 @@ const Pergunta = connection.define("pergunta", {
 // sincroniza os dados acima com o DB, o force não irá forçar criar a tabela caso ela exista
 Pergunta.sync({force:false}).then(()=>{})
 // para criar é só importar o module no index
+
+module.exports = Pergunta

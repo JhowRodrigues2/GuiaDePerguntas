@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const connection = require("./database/database")
-const perguntaModel = require('./database/pergunta')
+const Pergunta = require('./database/pergunta')
 
 connection.authenticate().then(()=>{
     console.log('Conexão realizada com o DB com sucesso!')
@@ -23,6 +23,7 @@ app.use(bodyParser.json())
 
 // render irá renderizar o html de acordo com o arquivo criado na view
 app.get('/',(req, res)=>{
+    Pergunta.findAll()
     res.render("index")
 })
 app.get('/perguntar',(req, res)=>{
@@ -32,7 +33,14 @@ app.get('/perguntar',(req, res)=>{
 app.post('/salvarpergunta',(req, res)=>{
     let titulo= req.body.titulo
     let descricao= req.body.descricao
-    res.send(titulo)
+    // metodo responsável por salvar a pergunta no DB, o mesmo que fazer um insert
+    Pergunta.create({
+        titulo: titulo,
+        descricao:descricao
+    }).then(()=>{
+        //após salvar a pergunta no DB, a página será redirecionada para a principal (/)
+        res.redirect('/')
+    })
 })
 
 app.listen(8080,()=>{
