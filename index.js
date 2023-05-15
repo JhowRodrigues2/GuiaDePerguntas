@@ -26,9 +26,9 @@ app.use(bodyParser.json());
 // render irá renderizar o html de acordo com o arquivo criado na view
 app.get("/", (req, res) => {
   // o raw:true lista apenas os dados em json, ordena pelo id do maior pelo menor
-  Pergunta.findAll({ raw: true, order:[['id','DESC']] }).then((perguntas) => {
+  Pergunta.findAll({ raw: true, order: [["id", "DESC"]] }).then((perguntas) => {
     res.render("index", {
-      perguntas: perguntas
+      perguntas: perguntas,
     });
   });
 });
@@ -47,7 +47,21 @@ app.post("/salvarpergunta", (req, res) => {
     res.redirect("/");
   });
 });
-
+// filtrar a pergunta de acordo com seu id
+app.get("/pergunta/:id", (req, res) => {
+  let id = req.params.id;
+  Pergunta.findOne({
+    where: { id: id },
+  }).then((pergunta) => {
+    if (pergunta != undefined) {
+      res.render("pergunta",{
+        pergunta:pergunta
+      });
+    } else {
+      res.redirect('/')
+    }
+  });
+});
 app.listen(8080, () => {
   console.log("Aplicação ON!");
 });
