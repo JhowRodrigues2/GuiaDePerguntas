@@ -30,7 +30,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 <a href="https://imgur.com/DNA4n5G"><img src="https://i.imgur.com/DNA4n5G.png" title="source: imgur.com" /></a>
   <br>
   
+## :memo: Licença
+
 Esse projeto está sob a licença MIT.
 
 ---
-
